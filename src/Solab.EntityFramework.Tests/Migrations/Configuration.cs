@@ -1,4 +1,3 @@
-using Solab.EntityFramework.Tests.Migrations.Configuration;
 using System.Data.Entity.Migrations;
 
 namespace Solab.EntityFramework.Tests.Migrations
