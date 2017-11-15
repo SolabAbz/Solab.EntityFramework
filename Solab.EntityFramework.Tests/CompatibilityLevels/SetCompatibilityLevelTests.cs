@@ -15,13 +15,12 @@ namespace Solab.EntityFramework.Tests.CompatibilityLevels
         {
             var writer = TextWriterHelpers.Create();
             var migration = new SetCompatibilityLevel(120, null);
-            migration.Invoke(() => writer, (IndentedTextWriter) => { });
+            migration.Invoke(() => writer, (IndentedTextWriter, SupressTransaction) => { });
             var sql = writer.InnerWriter.ToString();
 
             using (var connection = ConnectionFactory.Create())
             {
                 Assert.AreNotEqual(120, connection.CompatibilityLevel());
-                connection.CreateSimpleTable();
                 connection.Execute(sql);
                 Assert.AreEqual(120, connection.CompatibilityLevel());
             }

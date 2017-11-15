@@ -20,10 +20,10 @@ namespace Solab.EntityFramework.TemporalTables
             Settings = settings;
         }
 
-        public void Invoke(Func<IndentedTextWriter> writerDelegate, Action<IndentedTextWriter> statementDelegate)
+        public void Invoke(Func<IndentedTextWriter> writerDelegate, Action<IndentedTextWriter, bool> statementDelegate)
         {
             WriterDelegate = writerDelegate;
-            StatementDelegate = statementDelegate;
+            StatementDelegate = x => statementDelegate.Invoke(x, false);
             DisableSystemVersioning();
             DropPeriodConstraint();
             DropPeriodColumns();

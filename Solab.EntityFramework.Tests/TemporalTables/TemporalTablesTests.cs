@@ -14,7 +14,7 @@ namespace Solab.EntityFramework.Tests.TemporalTables
         {
             var writer = new IndentedTextWriter(new StringWriter());
             var migration = new EnableTemporalTableMigration(new TemporalTableSettings("dbo.SimpleTable", "VersionStartTime", "VersionEndTime"), null);
-            migration.Invoke(() => writer, (IndentedTextWriter) => { });
+            migration.Invoke(() => writer, (IndentedTextWriter, SupressTransaction) => { });
             var sql = writer.InnerWriter.ToString();
 
             using (var connection = ConnectionFactory.Create())

@@ -14,7 +14,17 @@ namespace Solab.EntityFramework.Tests.Migrations.Configuration
         {
             if (migrationOperation is IMigrationAction operation)
             {
-                operation.Invoke(Writer, (IndentedTextWriter) => Statement(IndentedTextWriter));
+                operation.Invoke(Writer, (IndentedTextWriter, SuppressTransaction) =>
+                {
+                    if (SuppressTransaction)
+                    {
+                        Statement(IndentedTextWriter.InnerWriter.ToString(), suppressTransaction: SuppressTransaction);
+                    }
+                    else
+                    {
+                        Statement(IndentedTextWriter);
+                    }
+                });
             }
         }
     }

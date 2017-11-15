@@ -2,9 +2,6 @@
 using Solab.EntityFramework.TemporalTables;
 using System.Data.Entity.Migrations;
 using System.Data.Entity.Migrations.Infrastructure;
-using System.Data.Entity.Migrations.Model;
-using System.Data.Entity.Migrations.Utilities;
-using System.Data.Entity.SqlServer;
 
 namespace Solab.EntityFramework
 {

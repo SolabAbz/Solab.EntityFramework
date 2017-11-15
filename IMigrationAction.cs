@@ -5,6 +5,7 @@ namespace Solab.EntityFramework
 {
     public interface IMigrationAction
     {
-        void Invoke(Func<IndentedTextWriter> writerDelegate, Action<IndentedTextWriter> statementDelegate);
+        void Invoke(Func<IndentedTextWriter> writerDelegate, Action<IndentedTextWriter, bool> statementDelegate);
     }
 }
+

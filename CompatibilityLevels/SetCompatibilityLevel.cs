@@ -10,6 +10,8 @@ namespace Solab.EntityFramework.CompatibilityLevels
 
         public Func<IndentedTextWriter> WriterDelegate { get; private set; }
 
+        public Action<IndentedTextWriter, bool> StatementDelegate { get; private set; }
+
         public override bool IsDestructiveChange => false;
 
         public SetCompatibilityLevel(int compatibilityLevel, object anonymousArguments) : base(anonymousArguments)
@@ -17,26 +19,20 @@ namespace Solab.EntityFramework.CompatibilityLevels
             this.compatibilityLevel = compatibilityLevel;
         }
 
-        public void Invoke(Func<IndentedTextWriter> writerDelegate, Action<IndentedTextWriter> statementDelegate)
+        public void Invoke(Func<IndentedTextWriter> writerDelegate, Action<IndentedTextWriter, bool> statementDelegate)
         {
             WriterDelegate = writerDelegate;
-            DeclareName();
-            AlterDatabase();
+            StatementDelegate = statementDelegate;
+            GenerateSql();
         }
 
-        private void DeclareName()
+        private void GenerateSql()
         {
             using (var writer = WriterDelegate.Invoke())
             {
                 writer.WriteLine("DECLARE @name NVARCHAR(MAX) = '[' + DB_NAME() + ']';");
-            }
-        }
-
-        private void AlterDatabase()
-        {
-            using(var writer = WriterDelegate.Invoke())
-            {
                 writer.WriteLine($"EXEC('ALTER DATABASE ' + @name + ' SET COMPATIBILITY_LEVEL = {compatibilityLevel}');");
+                StatementDelegate.Invoke(writer, true);
             }
         }
     }

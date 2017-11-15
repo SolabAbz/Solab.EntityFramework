@@ -1,11 +1,9 @@
 ﻿using NUnit.Framework;
 using Solab.EntityFramework.Tests.Context;
+using Solab.EntityFramework.Tests.Helpers;
 using System;
-using System.Collections.Generic;
 using System.Data.SqlClient;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Solab.EntityFramework.Tests.MigrationTests
 {
@@ -15,23 +13,32 @@ namespace Solab.EntityFramework.Tests.MigrationTests
         [Test]
         public void MigrateDatabase()
         {
-            using (var context = new DatabaseContext(GenerateConnectionString()))
+            var connectionString = GenerateConnectionString();
+
+            using (var context = new DatabaseContext(connectionString))
             {
                 context.People.Add(new Person { Id = Guid.NewGuid() });
                 context.SaveChanges();
-            }
-
-            using (var context = new DatabaseContext(ConnectionFactory.DefaultLocalDbInstance))
-            {
                 var people = context.People.ToList();
                 Assert.IsNotEmpty(people);
+            }
+
+            using(var connection = new SqlConnection(connectionString))
+            {
+                connection.Open();
+                Assert.AreEqual(120, connection.CompatibilityLevel());
+                Assert.IsTrue(connection.TableExists("People_History"));
             }
         }
 
         private string GenerateConnectionString()
         {
-            var builder = new SqlConnectionStringBuilder(ConnectionFactory.DefaultLocalDbInstance);
-            builder.InitialCatalog = "SolabEntityFrameworkTests";
+            var builder = new SqlConnectionStringBuilder(ConnectionFactory.DefaultLocalDbInstance)
+            {
+                InitialCatalog = "SolabEntityFrameworkTests",
+                IntegratedSecurity = true
+            };
+
             return builder.ToString();
         }
     }
