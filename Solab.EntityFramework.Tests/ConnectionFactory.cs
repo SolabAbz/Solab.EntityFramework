@@ -9,7 +9,7 @@ namespace Solab.EntityFramework.Tests
 {
     public static class ConnectionFactory
     {
-        private const string DefaultLocalDbInstance = "Data Source=(LocalDB)\\MSSQLLocalDB";
+        public const string DefaultLocalDbInstance = "Data Source=(LocalDB)\\MSSQLLocalDB";
         public const string DefaultDatabaseName = "UnitTests";
 
         public static SqlConnection Create(string database = DefaultDatabaseName)

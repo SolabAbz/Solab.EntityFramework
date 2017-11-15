@@ -23,6 +23,11 @@ namespace Solab.EntityFramework.Tests.Helpers
             return false;
         }
 
+        public static int CompatibilityLevel(this SqlConnection connection)
+        {
+            return connection.QueryFirst<int>("select compatibility_level from sys.databases where name = DB_NAME()");
+        }
+
         public static void CreateDatabase(this SqlConnection connection, string database)
         {
             connection.Execute($"CREATE DATABASE [{database}]");

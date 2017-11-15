@@ -1,4 +1,5 @@
-﻿using Solab.EntityFramework.TemporalTables;
+﻿using Solab.EntityFramework.CompatibilityLevels;
+using Solab.EntityFramework.TemporalTables;
 using System.Data.Entity.Migrations;
 using System.Data.Entity.Migrations.Infrastructure;
 using System.Data.Entity.Migrations.Model;
@@ -28,5 +29,12 @@ namespace Solab.EntityFramework
                 .AddOperation(new RemoveTemporalTableMigration(
                     new TemporalTableSettings(table, startPeriodColumnName, endPeriodColumnName), null));
         }
+
+        public static void SetCompatibilityLevel(this DbMigration migration, int compatibilityLevel)
+        {
+            ((IDbMigration)migration)
+                .AddOperation(new SetCompatibilityLevel(compatibilityLevel, null));
+        }
+
     }
 }

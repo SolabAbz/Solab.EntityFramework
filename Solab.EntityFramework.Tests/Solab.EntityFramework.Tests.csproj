@@ -68,9 +68,18 @@
   <ItemGroup>
     <Compile Include="CompatibilityLevels\SetCompatibilityLevelTests.cs" />
     <Compile Include="ConnectionFactory.cs" />
+    <Compile Include="Context\DatabaseContext.cs" />
     <Compile Include="DatabaseSetup.cs" />
     <Compile Include="Helpers\DatabaseHelpers.cs" />
+    <Compile Include="Helpers\IndentedTextWriterHelpers.cs" />
     <Compile Include="Helpers\TableHelpers.cs" />
+    <Compile Include="Migrations\201711150942592_Init.cs" />
+    <Compile Include="Migrations\201711150942592_Init.Designer.cs">
+      <DependentUpon>201711150942592_Init.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\Configuration.cs" />
+    <Compile Include="Migrations\Configuration\CustomSqlServerMigrationGenerator.cs" />
+    <Compile Include="MigrationTests\MigrationTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="TemporalTables\TemporalTablesTests.cs" />
   </ItemGroup>
@@ -78,7 +87,11 @@
     <None Include="App.config" />
     <None Include="packages.config" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\201711150942592_Init.resx">
+      <DependentUpon>201711150942592_Init.cs</DependentUpon>
+    </EmbeddedResource>
+  </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Solab.EntityFramework.csproj">
       <Project>{7b10c945-538b-4d4d-9836-da727bbfc212}</Project>

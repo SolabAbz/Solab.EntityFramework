@@ -8,7 +8,7 @@ namespace Solab.EntityFramework.TemporalTables
     {
         public override bool IsDestructiveChange => true;
 
-        public TemporalTableSettings Settings { get; private set; }
+        public TemporalTableSettings Settings { get; }
 
         public Func<IndentedTextWriter> WriterDelegate { get; private set; }
 
@@ -34,7 +34,7 @@ namespace Solab.EntityFramework.TemporalTables
         {
             using (var writer = WriterDelegate.Invoke())
             {
-                var sql = "ALTER TABLE {0} SET(SYSTEM_VERSIONING = OFF);";
+                const string sql = "ALTER TABLE {0} SET(SYSTEM_VERSIONING = OFF);";
                 writer.WriteLine(sql, Settings.Table);
                 StatementDelegate.Invoke(writer);
             }
@@ -44,7 +44,7 @@ namespace Solab.EntityFramework.TemporalTables
         {
             using (var writer = WriterDelegate.Invoke())
             {
-                var sql = "ALTER TABLE {0} DROP COLUMN {1};";
+                const string sql = "ALTER TABLE {0} DROP COLUMN {1};";
                 writer.WriteLine(sql, Settings.Table, Settings.StartPeriodColumnName);
                 writer.WriteLine(sql, Settings.Table, Settings.EndPeriodColumnName);
                 StatementDelegate.Invoke(writer);
@@ -55,7 +55,7 @@ namespace Solab.EntityFramework.TemporalTables
         {
             using (var writer = WriterDelegate.Invoke())
             {
-                var sql = "ALTER TABLE {0} DROP PERIOD FOR SYSTEM_TIME;";
+                const string sql = "ALTER TABLE {0} DROP PERIOD FOR SYSTEM_TIME;";
                 writer.WriteLine(sql, Settings.Table);
                 StatementDelegate.Invoke(writer);
             }
@@ -65,7 +65,7 @@ namespace Solab.EntityFramework.TemporalTables
         {
             using (var writer = WriterDelegate.Invoke())
             {
-                var sql = "DROP TABLE {0};";
+                const string sql = "DROP TABLE {0};";
                 writer.WriteLine(sql, Settings.HistoryTable);
                 StatementDelegate.Invoke(writer);
             }

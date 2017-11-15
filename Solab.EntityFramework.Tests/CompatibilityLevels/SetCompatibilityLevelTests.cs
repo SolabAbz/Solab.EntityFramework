@@ -13,21 +13,17 @@ namespace Solab.EntityFramework.Tests.CompatibilityLevels
         [Test]
         public void Set_Compatibility_Level()
         {
-            var writer = new IndentedTextWriter(new StringWriter());
+            var writer = TextWriterHelpers.Create();
             var migration = new SetCompatibilityLevel(120, null);
             migration.Invoke(() => writer, (IndentedTextWriter) => { });
             var sql = writer.InnerWriter.ToString();
 
             using (var connection = ConnectionFactory.Create())
             {
-                var level = connection.QueryFirst<int>("select compatibility_level from sys.databases where name = DB_NAME()");
-                Assert.AreNotEqual(120, level);
-
+                Assert.AreNotEqual(120, connection.CompatibilityLevel());
                 connection.CreateSimpleTable();
                 connection.Execute(sql);
-
-                level = connection.QueryFirst<int>("select compatibility_level from sys.databases where name = DB_NAME()");
-                Assert.AreEqual(120, level);
+                Assert.AreEqual(120, connection.CompatibilityLevel());
             }
         }
     }
