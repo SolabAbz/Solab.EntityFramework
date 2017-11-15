@@ -54,6 +54,7 @@
     <Compile Include="IMigrationAction.cs" />
     <Compile Include="MigrationExtensions.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SolabMigrationGenerator.cs" />
     <Compile Include="TemporalTables\EnableTemporalTableMigration.cs" />
     <Compile Include="TemporalTables\RemoveTemporalTableMigration.cs" />
     <Compile Include="TemporalTables\TemporalTableOptions.cs" />

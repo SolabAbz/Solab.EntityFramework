@@ -8,7 +8,7 @@ namespace Solab.EntityFramework.Tests.Migrations
         public MigrationConfiguration()
         {
             AutomaticMigrationsEnabled = false;
-            SetSqlGenerator("System.Data.SqlClient", new CustomSqlServerMigrationGenerator());
+            SetSqlGenerator("System.Data.SqlClient", new SolabMigrationGenerator());
         }
 
         protected override void Seed(Solab.EntityFramework.Tests.Context.DatabaseContext context)

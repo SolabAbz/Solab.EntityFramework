@@ -79,7 +79,6 @@
       <DependentUpon>201711150942592_Init.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
-    <Compile Include="Migrations\Configuration\CustomSqlServerMigrationGenerator.cs" />
     <Compile Include="MigrationTests\MigrationTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="TemporalTables\TemporalTablesTests.cs" />
