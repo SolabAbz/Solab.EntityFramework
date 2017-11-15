@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.27004.2008
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Solab.EntityFramework", "Solab.EntityFramework.csproj", "{7B10C945-538B-4D4D-9836-DA727BBFC212}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Solab.EntityFramework", "Solab.EntityFramework\Solab.EntityFramework.csproj", "{7B10C945-538B-4D4D-9836-DA727BBFC212}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Solab.EntityFramework.Tests", "Solab.EntityFramework.Tests\Solab.EntityFramework.Tests.csproj", "{77619236-9281-4C66-BB52-9C48C357A2B2}"
 EndProject
