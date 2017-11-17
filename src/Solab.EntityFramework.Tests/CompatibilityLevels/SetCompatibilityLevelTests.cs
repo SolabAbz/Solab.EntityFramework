@@ -14,7 +14,7 @@ namespace Solab.EntityFramework.Tests.CompatibilityLevels
         public void Set_Compatibility_Level()
         {
             var writer = TextWriterHelpers.Create();
-            var migration = new SetCompatibilityLevel(120, null);
+            var migration = new SetCompatibilityLevel(120);
             migration.Invoke(() => writer, (IndentedTextWriter, SupressTransaction) => { });
             var sql = writer.InnerWriter.ToString();
 

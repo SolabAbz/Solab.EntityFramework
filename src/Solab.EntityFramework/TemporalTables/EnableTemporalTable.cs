@@ -4,7 +4,7 @@ using System;
 
 namespace Solab.EntityFramework.TemporalTables
 {
-    public class EnableTemporalTableMigration : MigrationOperation, IMigrationAction
+    public class EnableTemporalTable : MigrationOperation, IMigrationAction
     {
         public override bool IsDestructiveChange => false;
 
@@ -14,8 +14,7 @@ namespace Solab.EntityFramework.TemporalTables
 
         public Action<IndentedTextWriter> StatementDelegate { get; private set; }
 
-        public EnableTemporalTableMigration(TemporalTableSettings settings,
-            object anonymousArguments) : base(anonymousArguments)
+        public EnableTemporalTable(TemporalTableSettings settings) : base(null)
         {
             Settings = settings;
         }

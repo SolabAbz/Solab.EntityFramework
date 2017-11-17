@@ -14,7 +14,7 @@ namespace Solab.EntityFramework.CompatibilityLevels
 
         public override bool IsDestructiveChange => false;
 
-        public SetCompatibilityLevel(int compatibilityLevel, object anonymousArguments) : base(anonymousArguments)
+        public SetCompatibilityLevel(int compatibilityLevel) : base(null)
         {
             this.compatibilityLevel = compatibilityLevel;
         }

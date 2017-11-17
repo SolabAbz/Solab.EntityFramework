@@ -78,6 +78,14 @@
     <Compile Include="Migrations\201711150942592_Init.Designer.cs">
       <DependentUpon>201711150942592_Init.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201711161444108_AddedDateDimension.cs" />
+    <Compile Include="Migrations\201711161444108_AddedDateDimension.Designer.cs">
+      <DependentUpon>201711161444108_AddedDateDimension.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201711161501119_AddedPersonName.cs" />
+    <Compile Include="Migrations\201711161501119_AddedPersonName.Designer.cs">
+      <DependentUpon>201711161501119_AddedPersonName.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="MigrationTests\MigrationTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -90,6 +98,12 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201711150942592_Init.resx">
       <DependentUpon>201711150942592_Init.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201711161444108_AddedDateDimension.resx">
+      <DependentUpon>201711161444108_AddedDateDimension.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201711161501119_AddedPersonName.resx">
+      <DependentUpon>201711161501119_AddedPersonName.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

@@ -1,15 +1,19 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using Solab.EntityFramework.DateTable;
+using System;
 using System.Data.Entity;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Solab.EntityFramework.Tests.Context
 {
     public class DatabaseContext : DbContext
     {
         public DbSet<Person> People { get; set; }
+
+        public DbSet<DateDimension> DateDimensions { get; set; }
+
+        public DatabaseContext()
+        {
+
+        }
 
         public DatabaseContext(string connectionString) : base(connectionString)
         {
@@ -20,5 +24,7 @@ namespace Solab.EntityFramework.Tests.Context
     public class Person
     {
         public Guid Id { get; set; }
+
+        public string Name { get; set; }
     }
 }
