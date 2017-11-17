@@ -30,12 +30,13 @@ namespace Solab.EntityFramework.DateTable
         {
             WriterDelegate = writerDelegate;
             StatementDelegate = x => statementDelegate.Invoke(x, false);
+            EmptyTable();
             PopulateDateDimension();
         }
 
-        public void PopulateDateDimension()
+        private void PopulateDateDimension()
         {
-            using(var writer = WriterDelegate.Invoke())
+            using (var writer = WriterDelegate.Invoke())
             {
                 foreach (var dimension in GenerateDateDimensions())
                 {
@@ -72,13 +73,22 @@ namespace Solab.EntityFramework.DateTable
             }
         }
 
+        private void EmptyTable()
+        {
+            using (var writer = WriterDelegate.Invoke())
+            {
+                writer.WriteLine($"DELETE FROM {Table}");
+                StatementDelegate.Invoke(writer);
+            }
+        }
+
         public IEnumerable<DateDimension> GenerateDateDimensions()
         {
             var dates = new List<DateDimension>();
             var timespan = (End - Start).Days;
             var start = Start.Date;
 
-            for(var i = 0; i < timespan; i++)
+            for (var i = 0; i <= timespan; i++)
             {
                 var current = start.Date.AddDays(i);
                 dates.Add(new DateDimension(current));
