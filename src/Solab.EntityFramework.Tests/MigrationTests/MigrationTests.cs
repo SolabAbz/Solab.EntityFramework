@@ -68,7 +68,6 @@ namespace Solab.EntityFramework.Tests.MigrationTests
 
                 Assert.IsTrue(connection.TableExists("People_History"));
                 Assert.Greater(records, 0);
-                Assert.AreEqual(120, connection.CompatibilityLevel());
             }
         }
 

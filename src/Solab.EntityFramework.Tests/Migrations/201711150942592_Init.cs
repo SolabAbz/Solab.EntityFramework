@@ -16,7 +16,6 @@ namespace Solab.EntityFramework.Tests.Migrations
                 .PrimaryKey(t => t.Id);
 
             this.EnableSystemVersioning("dbo.People");
-            this.SetCompatibilityLevel(120);
         }
 
         public override void Down()
@@ -24,7 +23,6 @@ namespace Solab.EntityFramework.Tests.Migrations
             DropTable("dbo.People");
 
             this.RemoveSystemVersioning("dbo.People");
-            this.SetCompatibilityLevel(140);
         }
     }
 }
