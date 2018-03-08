@@ -8,6 +8,8 @@ namespace Solab.EntityFramework.Core.Tests.Context
     {
         public DbSet<Person> People { get; set; }
 
+        public DbSet<Invoice> Invoices { get; set; }
+
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             if (!optionsBuilder.IsConfigured)
@@ -24,5 +26,12 @@ namespace Solab.EntityFramework.Core.Tests.Context
         public Guid Id { get; set; }
 
         public string Name { get; set; }
+    }
+
+    public class Invoice
+    {
+        public Guid Id { get; set; }
+
+        public string Notes { get; set; }
     }
 }

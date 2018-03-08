@@ -39,6 +39,7 @@ namespace Solab.EntityFramework.Core.Tests.Helpers
 
         public static void DropDatabase(this SqlConnection connection, string database)
         {
+            connection.Execute("ALTER DATABASE [databasename] SET SINGLE_USER WITH ROLLBACK IMMEDIATE");
             connection.Execute($"DROP DATABASE [{database}]");
         }
 

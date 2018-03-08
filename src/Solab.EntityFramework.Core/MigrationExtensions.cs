@@ -51,7 +51,7 @@ namespace Solab.EntityFramework
             bool createPeriodColumns = true)
         {
             var settings = new TemporalTableSettings(table, startPeriodColumnName, endPeriodColumnName, createPeriodColumns, schema);
-            migration.Operations.Add(new EnableTemporalTable(settings));
+            migration.Operations.Add(new RemoveTemporalTable(settings));
         }
     }
 }

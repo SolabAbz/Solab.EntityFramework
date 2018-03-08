@@ -11,9 +11,10 @@ using System;
 namespace Solab.EntityFramework.Core.Tests.Migrations
 {
     [DbContext(typeof(DatabaseContext))]
-    partial class DatabaseContextModelSnapshot : ModelSnapshot
+    [Migration("20180308090131_AddedInvoiceTemporalTable")]
+    partial class AddedInvoiceTemporalTable
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

@@ -43,7 +43,7 @@ namespace Solab.EntityFramework.Core.TemporalTables
         {
             builder.Append("ALTER TABLE ")
                    .Append(Settings.Table)
-                   .Append(" SET(SYSTEM_VERSIONING = OFF);")
+                   .Append(" SET (SYSTEM_VERSIONING = OFF)")
                    .EndCommand(true);
         }
 
@@ -52,13 +52,13 @@ namespace Solab.EntityFramework.Core.TemporalTables
             builder.Append("ALTER TABLE ")
                    .Append(Settings.Table)
                    .Append(" DROP COLUMN ")
-                   .Append(Helper.EscapeLiteral(Settings.StartPeriodColumnName))
+                   .Append(Settings.StartPeriodColumnName)
                    .EndCommand(true);
 
             builder.Append("ALTER TABLE ")
                    .Append(Settings.Table)
                    .Append(" DROP COLUMN ")
-                   .Append(Helper.EscapeLiteral(Settings.EndPeriodColumnName))
+                   .Append(Settings.EndPeriodColumnName)
                    .EndCommand(true);
         }
 
@@ -66,15 +66,14 @@ namespace Solab.EntityFramework.Core.TemporalTables
         {
             builder.Append("ALTER TABLE ")
                    .Append(Settings.Table)
-                   .Append(" DROP PERIOD FOR SYSTEM_TIME;")
+                   .Append(" DROP PERIOD FOR SYSTEM_TIME")
                    .EndCommand(true);
         }
 
         private void DropHistoryTable(MigrationCommandListBuilder builder)
         {
-            builder.Append("DROP TABLE")
+            builder.Append("DROP TABLE ")
                    .Append(Settings.HistoryTable)
-                   .Append(";")
                    .EndCommand(true);
         }
 
