@@ -1,8 +1,6 @@
-﻿using Solab.EntityFramework.DateTable;
-using Solab.EntityFramework.TemporalTables;
+﻿using Microsoft.EntityFrameworkCore.Migrations;
+using Solab.EntityFramework.Core.TemporalTables;
 using System;
-using System.Data.Entity.Migrations;
-using System.Data.Entity.Migrations.Infrastructure;
 
 namespace Solab.EntityFramework
 {
@@ -21,14 +19,15 @@ namespace Solab.EntityFramework
         ///     Overrides the end period default column name.
         ///     You must also override the column name in the RemoveSystemVersioning call.
         /// </param>
-        public static void EnableSystemVersioning(this DbMigration migration,
+        public static void EnableSystemVersioning(this MigrationBuilder migration,
             string table,
+            string schema = "dbo",
             string startPeriodColumnName = "VersionStartTime",
-            string endPeriodColumnName = "VersionEndTime")
+            string endPeriodColumnName = "VersionEndTime",
+            bool createPeriodColumns = true)
         {
-            ((IDbMigration)migration)
-                .AddOperation(new EnableTemporalTable(
-                    new TemporalTableSettings(table, startPeriodColumnName, endPeriodColumnName)));
+            var settings = new TemporalTableSettings(table, startPeriodColumnName, endPeriodColumnName, createPeriodColumns, schema);
+            migration.Operations.Add(new EnableTemporalTable(settings));
         }
 
         /// <summary>
@@ -44,27 +43,15 @@ namespace Solab.EntityFramework
         ///     Overrides the end period default column name.
         ///     You must also override the column name in the RemoveSystemVersioning call.
         /// </param>
-        public static void RemoveSystemVersioning(this DbMigration migration,
+        public static void RemoveSystemVersioning(this MigrationBuilder migration,
             string table,
+            string schema = "dbo",
             string startPeriodColumnName = "VersionStartTime",
-            string endPeriodColumnName = "VersionEndTime")
+            string endPeriodColumnName = "VersionEndTime",
+            bool createPeriodColumns = true)
         {
-            ((IDbMigration)migration)
-                .AddOperation(new RemoveTemporalTable(
-                    new TemporalTableSettings(table, startPeriodColumnName, endPeriodColumnName)));
-        }
-
-        /// <summary>
-        ///     Empties and then populates a DbSet<DateDimension> with data.
-        /// </summary>
-        /// <param name="migration"></param>
-        /// <param name="table">The name of the table to populate e.g. dbo.DateDimension</param>
-        /// <param name="start">The initial date to populate the table with</param>
-        /// <param name="end">The final date to populate the table with</param>
-        public static void PopulateDateTable(this DbMigration migration, string table, DateTime start, DateTime end)
-        {
-            ((IDbMigration)migration)
-                .AddOperation(new PopulateDateTable(table, start, end));
+            var settings = new TemporalTableSettings(table, startPeriodColumnName, endPeriodColumnName, createPeriodColumns, schema);
+            migration.Operations.Add(new RemoveTemporalTable(settings));
         }
     }
 }

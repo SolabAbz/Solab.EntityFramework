@@ -50,7 +50,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="CompatibilityLevels\SetCompatibilityLevel.cs" />
     <Compile Include="DateTable\DateDimension.cs" />
     <Compile Include="DateTable\GenerateDateTable.cs" />
     <Compile Include="IMigrationAction.cs" />

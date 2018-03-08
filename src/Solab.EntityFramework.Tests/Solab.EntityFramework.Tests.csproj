@@ -67,7 +67,6 @@
     <Reference Include="System.Xml.Linq" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="CompatibilityLevels\SetCompatibilityLevelTests.cs" />
     <Compile Include="ConnectionFactory.cs" />
     <Compile Include="Context\DatabaseContext.cs" />
     <Compile Include="DatabaseSetup.cs" />
