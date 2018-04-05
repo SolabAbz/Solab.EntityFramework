@@ -5,11 +5,9 @@ Solab entity framework is a small libary that extends the default entity framewo
 ## Packages
 | Package Name               	| Minimum Versions                             	|                                 	|
 |----------------------------	|----------------------------------------------	|---------------------------------	|
-| Solab.EntityFramework      	| EF 6+                                        	| [Nuget](https://www.google.com) 	|
-| Solab.EntityFramework.Core 	| Microsoft.EntityFrameworkCore.SqlServer 2.1+ 	| [Nuget](https://www.google.com) 	|
+| Solab.EntityFramework      	| EF 6+                                        	| [Nuget](https://www.nuget.org/packages/Solab.EntityFramework/) 	|
+| Solab.EntityFramework.Core 	| Microsoft.EntityFrameworkCore.SqlServer 2.1+ 	| [Nuget](https://www.nuget.org/packages/Solab.EntityFramework.Core/) 	|
 
-
-## Configuration
 
 ## EF6
 
@@ -31,24 +29,7 @@ Solab entity framework is a small libary that extends the default entity framewo
     }
 ```
 
-## EF Core
-
-```csharp
-    using Solab.EntityFramework.Core;
-
-    ...
-
-    public void ConfigureServices(IServiceCollection services)
-    {
-        services.AddDbContext<ApplicationContext>(options => options
-            .ReplaceService<IMigrationsSqlGenerator, SolabMigrationGenerator>()
-            .UseSqlServer("Server=myServerAddress;Database=myDataBase;User Id=myUsername;Password=myPassword;"));
-    }
-
-```
-
-## Examples
-### EF6 - Temporal Tables
+### Temporal Tables
 ```csharp
     public partial class EnableTemporalTablesOnPeople : DbMigration
     {
@@ -64,7 +45,27 @@ Solab entity framework is a small libary that extends the default entity framewo
     }
 ```
 
-### EF Core - Temporal Tables
+
+## EF Core
+
+You have to replace the default migration generator to handle the additional commands.
+
+```csharp
+    using Solab.EntityFramework.Core;
+
+    ...
+
+    public void ConfigureServices(IServiceCollection services)
+    {
+        services.AddDbContext<ApplicationContext>(options => options
+            .ReplaceService<IMigrationsSqlGenerator, SolabMigrationGenerator>()
+            .UseSqlServer("Server=myServerAddress;Database=myDataBase;User Id=myUsername;Password=myPassword;"));
+    }
+
+```
+
+
+### Temporal Tables
 
 ```csharp
 using Microsoft.EntityFrameworkCore.Migrations;
